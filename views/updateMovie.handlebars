@@ -1,0 +1,44 @@
+<h1>Update Movie</h1>
+<form action="/movies/update/{{movie._id}}" method="POST">
+    <div class="form-group">
+        <label for="Movie_ID">Movie ID:</label>
+        <input type="number" name="Movie_ID" id="Movie_ID" value="{{movie.Movie_ID}}" readonly>
+    </div>
+    
+    <div class="form-group">
+        <label for="Title">Title:</label>
+        <input type="text" name="Title" id="Title" value="{{movie.Title}}" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="Year">Year:</label>
+        <input type="number" name="Year" id="Year" value="{{movie.Year}}">
+    </div>
+    
+    <div class="form-group">
+        <label for="Director">Director:</label>
+        <input type="text" name="Director" id="Director" value="{{movie.Director}}">
+    </div>
+    
+    <div class="form-group">
+        <label for="Released">Released:</label>
+        <input type="text" name="Released" id="Released" value="{{movie.Released}}">
+    </div>
+    
+    <div class="form-group">
+        <label for="Genre">Genre:</label>
+        <input type="text" name="Genre" id="Genre" value="{{movie.Genre}}">
+    </div>
+    
+    <div class="form-group">
+        <label for="Plot">Plot:</label>
+        <textarea name="Plot" id="Plot" rows="4">{{movie.Plot}}</textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="imdbRating">IMDB Rating:</label>
+        <input type="number" step="0.1" min="0" max="10" name="imdbRating" id="imdbRating" value="{{movie.imdbRating}}">
+    </div>
+    
+    <button type="submit">Update Movie</button>
+</form>

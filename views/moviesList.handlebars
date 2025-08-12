@@ -1,0 +1,49 @@
+<h1>All Movies</h1>
+<div class="movies-container">
+    {{#each movies}}
+    <div class="movie-card">
+        <h2 class="movie-title">{{this.Title}} ({{this.Year}})</h2>
+        <div class="movie-info">
+            <div class="info-item">
+                <span class="info-label">Movie ID:</span> {{this.Movie_ID}}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Director:</span> {{this.Director}}
+            </div>
+            <div class="info-item">
+                <span class="info-label">Rating:</span> {{this.imdbRating}}/10
+            </div>
+            <div class="info-item">
+                <span class="info-label">Released:</span> {{this.Released}}
+            </div>
+        </div>
+        <div class="action-buttons">
+            <a href="/movies/update/{{this._id}}">
+                <button class="btn-edit">Edit</button>
+            </a>
+            <button class="btn-delete" onclick="deleteMovie('{{this._id}}')">Delete</button>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<script>
+async function deleteMovie(id) {
+    if (confirm('Are you sure you want to delete this movie?')) {
+        try {
+            const response = await fetch(`/api/movies/${id}`, {
+                method: 'DELETE'
+            });
+            const result = await response.json();
+            if (result.success) {
+                alert('Movie deleted successfully');
+                location.reload();
+            } else {
+                alert('Error deleting movie: ' + result.message);
+            }
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    }
+}
+</script>

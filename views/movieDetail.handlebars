@@ -1,0 +1,65 @@
+<h1>{{movie.Title}}</h1>
+<div class="movie-card">
+    <div class="movie-info">
+        <div class="info-item">
+            <span class="info-label">Movie ID:</span> {{movie.Movie_ID}}
+        </div>
+        <div class="info-item">
+            <span class="info-label">Year:</span> {{movie.Year}}
+        </div>
+        <div class="info-item">
+            <span class="info-label">Director:</span> {{movie.Director}}
+        </div>
+        <div class="info-item">
+            <span class="info-label">Genre:</span> {{movie.Genre}}
+        </div>
+        <div class="info-item">
+            <span class="info-label">Released:</span> {{movie.Released}}
+        </div>
+        <div class="info-item">
+            <span class="info-label">Runtime:</span> {{movie.Runtime}}
+        </div>
+        <div class="info-item">
+            <span class="info-label">IMDB Rating:</span> {{movie.imdbRating}}/10
+        </div>
+        <div class="info-item">
+            <span class="info-label">Language:</span> {{movie.Language}}
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <h3>Plot:</h3>
+        <p>{{movie.Plot}}</p>
+    </div>
+    
+    <div class="action-buttons">
+        <a href="/movies/update/{{movie._id}}">
+            <button class="btn-edit">Edit Movie</button>
+        </a>
+        <button class="btn-delete" onclick="deleteMovie('{{movie._id}}')">Delete Movie</button>
+        <a href="/movies/search">
+            <button>Search Another</button>
+        </a>
+    </div>
+</div>
+
+<script>
+async function deleteMovie(id) {
+    if (confirm('Are you sure you want to delete this movie?')) {
+        try {
+            const response = await fetch(`/api/movies/${id}`, {
+                method: 'DELETE'
+            });
+            const result = await response.json();
+            if (result.success) {
+                alert('Movie deleted successfully');
+                window.location.href = '/movies/all';
+            } else {
+                alert('Error deleting movie: ' + result.message);
+            }
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    }
+}
+</script>

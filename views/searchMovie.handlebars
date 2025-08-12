@@ -1,0 +1,27 @@
+<h1>Search Movie</h1>
+<div class="search-container">
+    <form action="/movies/search" method="POST">
+        <div class="form-group">
+            <label for="searchType">Search By:</label>
+            <select name="searchType" id="searchType" required>
+                <option value="">Select search type</option>
+                <option value="id">MongoDB ID</option>
+                <option value="movieId">Movie ID</option>
+                <option value="title">Title</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="searchValue">Search Value:</label>
+            <input type="text" name="searchValue" id="searchValue" required placeholder="Enter search value">
+        </div>
+        
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+{{#if error}}
+<div class="error">
+    {{error}}
+</div>
+{{/if}}
