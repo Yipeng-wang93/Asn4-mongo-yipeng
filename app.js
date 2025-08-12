@@ -12,6 +12,8 @@ const port = process.env.PORT || 8000;
 // Handlebars setup
 app.engine('handlebars', exphbs.engine({
     defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, 'views', 'layouts'),
+    extname: '.handlebars',
     helpers: {
         json: function(context) {
             return JSON.stringify(context, null, 2);
@@ -19,7 +21,7 @@ app.engine('handlebars', exphbs.engine({
     }
 }));
 app.set('view engine', 'handlebars');
-
+app.set('views', path.join(__dirname, 'views'));
 // Middleware
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
